@@ -8,11 +8,11 @@
 	<body>
 		<canvas id="myCanvas" width="500" height="500" style="position: absolute; left: 100px; top: 10px; "></canvas>
 		
-		<input type="button" name="button1" value="Eraser" style="position: absolute; left: 6px; top: 50px; " onClick=submitForm(this)/>
+		<button id="erase" style="position: absolute; left: 6px; top: 50px; " >Eraser<button/>
 
-		<input type="button" name="button2" value="Thicker line" style="position: absolute; left: 3px; top: 100px; " onClick=submitForm(this)/>
+		<button id="thicker" style="position: absolute; left: 3px; top: 100px; " >Thicker Line<button/>
 
-		<input type="button" name="button3" value="Thinner Line" style="position: absolute; left: 3px; top: 150px; " onClick=submitForm(this)/>
+		<button id="thinner" style="position: absolute; left: 3px; top: 150px; " >Thinner Line<button/>
 
 	</body>
 <!-- CSS code here -->
@@ -23,8 +23,48 @@
 <script>
 	var c = document.getElementById("myCanvas");
 	var ctx = c.getContext("2d");
+	var mouseStillDown = false;
 	ctx.fillStyle = "#FF0000";
 	ctx.fillRect(0,0,500,500);
+
+	c.addEventListener('mousedown', function (event){
+		console.log("EventListener Activated");
+		mouseStillDown = true;
+        writeStuff();
+	});
+
+	c.addEventListener('mouseup', function (event){
+		console.log("EventListener Activated false");
+		mouseStillDown = false;
+        
+	});
+
+	function writeStuff(){
+		if(mouseStillDown){
+			console.log("While Loop Active")
+			var elemLeft = c.offsetLeft,
+			elemTop = c.offsetTop;
+			var x = event.pageX - elemLeft,
+	        y = event.pageY - elemTop;
+	        ctx.beginPath();
+	        ctx.arc(x, y, 70, 0, 2 * Math.PI, false);
+	        ctx.fillStyle = 'green';
+	        ctx.fill();
+	        ctx.lineWidth = 5;
+	        ctx.strokeStyle = '#003300';
+	        ctx.stroke();
+	    }
+	}
+
+
+	var eraseBtn = document.getElementById('erase');
+	eraseBtn.addEventListener('click', function(event){
+		var canvas = document.getElementById('myCanvas');
+      	var context = canvas.getContext('2d');
+      	console.log("function Working");
+		context.clearRect(0, 0, c.width, c.height);
+	});
+
 </script>
 </html>
 
