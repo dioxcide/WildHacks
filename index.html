@@ -1,22 +1,28 @@
 <html>
+<link rel="stylesheet" type="text/css" href="StyleSheet1.css">
 	<head>
 		<title> Oscar Whiteboard </title>
-		<linkrel="stylesheet" type="text/css" href="style.css">
 		<!-- javascript libraries -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	</head>
 
-	<body bgcolor="#E6E6FA">
-		
-	        <canvas id="myCanvas" width="1000" height="500" style="position: absolute; left: 100px; top: 10px; "></canvas>
-		
-		<input type="button" name="button1" value="Eraser" style="position: absolute; left: 6px; top: 50px; " onClick=submitForm(this)/>
+<body bgcolor="#E6E6FA">
 
-		<input type="button" name="button2" value="Thicker line" style="position: absolute; left: 3px; top: 100px; " onClick=submitForm(this)/>
+    
+        <canvas id="myCanvas" width="600" height="500" style="position:absolute; left: 400px; top: 10px; "></canvas>
+    <p align="left">
 
-		<input type="button" name="button3" value="Thinner Line" style="position: absolute; left: 3px; top: 150px; " onClick=submitForm(this)/>
-
-	</body>
+        <div>
+        <input type="button" name="button1" value="Draw" style="position: absolute; left: 3px; top: 50px; " onclick=submitForm(this) />
+   
+        <input type="button" name="button2" value="Pen" style="position: absolute; left: 3px; top: 100px; " onclick=submitForm(this) />
+      
+        <input type="button" name="button3" value="Text" style="position: absolute; left: 3px; top: 150px; " onclick=submitForm(this) />
+       
+        <input type="button" name="button4" value="Eraser" style="position: absolute; left: 3px; top: 200px; " onclick=submitForm(this) />
+        </div>
+    </p>
+    </body>
 <!-- CSS code here -->
 <style>
 </style>
