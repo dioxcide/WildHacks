@@ -1,12 +1,13 @@
 <html>
 	<head>
 		<title> Oscar Whiteboard </title>
+		<linkrel="stylesheet" type="text/css" href="style.css">
 		<!-- javascript libraries -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	</head>
 
-	<body>
-		<canvas id="myCanvas" width="500" height="500" style="position: absolute; left: 100px; top: 10px; "></canvas>
+	<body bgcolor="#E6E6FA">
+	        <canvas id="myCanvas" width="1000" height="500" style="position: absolute; left: 100px; top: 10px; "></canvas>
 		
 		<input type="button" name="button1" value="Eraser" style="position: absolute; left: 6px; top: 50px; " onClick=submitForm(this)/>
 
@@ -23,7 +24,7 @@
 <script>
 	var c = document.getElementById("myCanvas");
 	var ctx = c.getContext("2d");
-	ctx.fillStyle = "#FF0000";
+	ctx.fillStyle = "#ffffff";
 	ctx.fillRect(0,0,500,500);
 </script>
 </html>
