@@ -2,7 +2,7 @@
 	<head>
 		<title> Oscar Whiteboard </title>
 		<!-- javascript libraries -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="http//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	</head>
 
 	<body>
@@ -24,38 +24,58 @@
 	var c = document.getElementById("myCanvas");
 	var ctx = c.getContext("2d");
 	var mouseStillDown = false;
+	var clickX = new Array(),
+		clickY = new Array(),
+		clickDrag = new Array();
+
 	ctx.fillStyle = "#FF0000";
 	ctx.fillRect(0,0,500,500);
 
+	function addClick(x, y, dragging){
+		clickX.push(x);
+		clickY.push(y);
+		clickDrag.push(dragging);
+	}
+
+	function redraw(){
+		ctx.clearRect(0, 0, c.width, c.height);
+		ctx.strokeStyle = "#db4f26";
+		ctx.lineJoin = "round";
+		ctx.lineWidth = 5;
+
+		for(var i = 0; i < clickX.length; i++){
+			ctx.beginPath();
+		    if(clickDrag[i] && i){
+		      ctx.moveTo(clickX[i-1], clickY[i-1]);
+		     }else{
+		       ctx.moveTo(clickX[i]-1, clickY[i]);
+		     }
+		     ctx.lineTo(clickX[i], clickY[i]);
+		     ctx.closePath();
+		     ctx.stroke();
+		}
+	}
+
 	c.addEventListener('mousedown', function (event){
 		console.log("EventListener Activated");
+		var mouseX = event.pageX - this.offseLeft;
+		var mouseY = event.pageY - this.offsetTop;
+
 		mouseStillDown = true;
-        writeStuff();
+		addClick(mouseX, mouseY);
+		redraw();
+	});
+
+	c.addEventListener('mousemove', function (event){
+		if(mouseStillDown){
+			addClick(event.pageX - this.offsetLeft, event.pageY - this.offsetTop, true);
+			redraw();
+		}
 	});
 
 	c.addEventListener('mouseup', function (event){
-		console.log("EventListener Activated false");
 		mouseStillDown = false;
-        
 	});
-
-	function writeStuff(){
-		if(mouseStillDown){
-			console.log("While Loop Active")
-			var elemLeft = c.offsetLeft,
-			elemTop = c.offsetTop;
-			var x = event.pageX - elemLeft,
-	        y = event.pageY - elemTop;
-	        ctx.beginPath();
-	        ctx.arc(x, y, 70, 0, 2 * Math.PI, false);
-	        ctx.fillStyle = 'green';
-	        ctx.fill();
-	        ctx.lineWidth = 5;
-	        ctx.strokeStyle = '#003300';
-	        ctx.stroke();
-	    }
-	}
-
 
 	var eraseBtn = document.getElementById('erase');
 	eraseBtn.addEventListener('click', function(event){
